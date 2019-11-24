@@ -9,5 +9,5 @@ const dbName = process.env.DB_NAME;
 export const dbUrl = `mongodb://${dbUsername}:${dbPassword}@${dbHost}:${dbPort}/${dbName}`;
 
 export const connectToDatabase = () => {
-    return mongoose.connect(dbUrl, { useNewUrlParser: true, useCreateIndex: true });
+    return mongoose.connect(dbUrl, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
 }
