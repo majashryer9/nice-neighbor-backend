@@ -17,12 +17,18 @@ const handleMongoError = (error: MongoError) => {
     return new CustomError(400, errorMessage);
 }
 
+const handleAssertionError = (error: Error) => {
+    return new CustomError(400, 'Incorrect field type.')
+}
+
 export const handleError = (error: Error) => {
     switch (error.name) {
         case 'ValidationError':
             return handleMongooseValidationError(<Error.ValidationError>error);
         case 'MongoError':
             return handleMongoError(error);
+        case 'AssertionError [ERR_ASSERTION]':
+            return handleAssertionError(error);
         default:
             return new CustomError(500, 'Internal Server Error');
     }
